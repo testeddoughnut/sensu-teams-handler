@@ -1,0 +1,16 @@
+---
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: helloworld
+  namespace: default
+  labels:
+    foo: bar
+spec:
+  command: echo "Hello {{ .system.os }} world!" && exit 1
+  publish: false
+  interval: 10
+  handlers:
+  - teams
+  subscriptions:
+  - development
