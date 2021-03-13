@@ -32,15 +32,6 @@ Use "sensu-teams-handler [command] --help" for more information about a command.
 
 ### Environment variables
 
-	webHookURL      = "webhook-url"
-	iconURL         = "icon-url"
-	messageTemplate = "message-template"
-	summaryTemplate = "summary-template"
-	incCheckLabels  = "include-check-labels"
-	incEntityLabels = "include-entity-labels"
-	redactMatch     = "redact-match"
-	redact          = "redact"
-
 |Argument                   |Environment Variable        |
 |---------------------------|----------------------------|
 |--webhook-url              |TEAMS_WEBHOOK_URL           |
