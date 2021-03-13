@@ -133,7 +133,6 @@ func checkArgs(_ *corev2.Event) (e error) {
 		if r := recover(); r != nil {
 			e = fmt.Errorf("regexp (%s) specified by TEAMS_REDACT or --redact is invalid", config.teamsRedactMatch)
 		}
-		return
 	}()
 	regexp.MustCompile(config.teamsRedactMatch)
 
@@ -188,23 +187,23 @@ func createMessage(event *corev2.Event) goteamsnotify.MessageCard {
 		ActivityImage: config.teamsIconURL,
 	}
 	if message == "" {
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Entity",
 			Value: event.Entity.Name,
 		})
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Check",
 			Value: event.Check.Name,
 		})
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "State",
 			Value: event.Check.State,
 		})
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Occurrences",
 			Value: fmt.Sprintf("%d", event.Check.Occurrences),
 		})
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Output",
 			Value: fmt.Sprintf("```\n%s```", event.Check.Output),
 		})
@@ -219,7 +218,7 @@ func createMessage(event *corev2.Event) goteamsnotify.MessageCard {
 			}
 			fmt.Fprintf(&buf, "%s: %s\n", k, v)
 		}
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Entity Labels",
 			Value: buf.String(),
 		})
@@ -234,12 +233,12 @@ func createMessage(event *corev2.Event) goteamsnotify.MessageCard {
 			}
 			fmt.Fprintf(&buf, "%s: %s\n<br>", k, v)
 		}
-		msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
+		_ = msgCardSection.AddFact(goteamsnotify.MessageCardSectionFact{
 			Name:  "Check Labels",
 			Value: buf.String(),
 		})
 	}
-	msgCard.AddSection(&msgCardSection)
+	_ = msgCard.AddSection(&msgCardSection)
 
 	return msgCard
 }
